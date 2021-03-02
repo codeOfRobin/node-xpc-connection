@@ -47,7 +47,7 @@ XpcConnection::~XpcConnection() {
 
 void XpcConnection::setup() {
   this->dispatchQueue = dispatch_queue_create(this->serviceName.c_str(), 0);
-  this->xpcConnnection = xpc_connection_create_mach_service(this->serviceName.c_str(), this->dispatchQueue);
+  this->xpcConnnection = xpc_connection_create_mach_service(this->serviceName.c_str(), this->dispatchQueue, XPC_CONNECTION_MACH_SERVICE_LISTENER);
 
   xpc_connection_set_event_handler(this->xpcConnnection, ^(xpc_object_t event) {
     xpc_retain(event);
